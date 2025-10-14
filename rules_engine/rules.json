@@ -1,0 +1,18 @@
+{
+  "rules_predicate": "any",
+  "rules": [
+    {
+      "field": "Sender",
+      "predicate": "contains",
+      "value": "cutshort"
+    },
+    {
+      "field": "Subject",
+      "predicate": "contains",
+      "value": "Zerodha"
+    }
+  ],
+  "actions": [
+    "mark_as_read"
+  ]
+}
