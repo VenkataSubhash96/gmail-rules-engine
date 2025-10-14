@@ -21,7 +21,7 @@ def parse_received_at(received_at_str):
     print(f"Warning: Could not parse received_at '{received_at_str}'")
     return None
 
-def store_emails_in_db(max_results=1000):
+def store_emails_in_db(max_results=500):
     """
     Fetch emails using Gmail API and store them in SQLite.
     """

@@ -27,7 +27,7 @@ def get_email_body(payload):
                 break
     return body
 
-def fetch_inbox_emails(service, max_results=1000, user_id="me"):
+def fetch_inbox_emails(service, max_results=500, user_id="me"):
     email_list = []
     try:
         results = service.users().messages().list(userId=user_id, maxResults=max_results).execute()

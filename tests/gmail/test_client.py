@@ -36,7 +36,7 @@ def test_fetch_emails_default_max_results():
         with patch("gmail.client.fetch_inbox_emails", return_value=mock_email_list) as mock_fetch:
             result = fetch_emails()
 
-            mock_fetch.assert_called_once_with(mock_service, 1000)
+            mock_fetch.assert_called_once_with(mock_service, 500)
             assert result == mock_email_list
 
 def test_mark_as_read_calls_gmail_api():

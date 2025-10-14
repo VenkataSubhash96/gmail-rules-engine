@@ -40,6 +40,6 @@ def move_message(service, message_id, folder):
         }
     ).execute()
 
-def fetch_emails(max_results=1000):
+def fetch_emails(max_results=500):
     service = get_gmail_service()
     return fetch_inbox_emails(service, max_results)
