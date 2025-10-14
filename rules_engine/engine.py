@@ -1,19 +1,26 @@
 import json
 import logging
+import os
+import sqlite3
 from pathlib import Path
+from db.rules_to_sql import rules_to_sql_query
+from rules_engine.validator import load_and_validate_rules
 from gmail.actions.mark_as_read import mark_as_read
 from gmail.actions.mark_as_unread import mark_as_unread
 from gmail.actions.move_message import move_message
-from db.rules_to_sql import rules_to_sql_query
-from rules_engine.validator import load_and_validate_rules
-import sqlite3
+
+USE_MOCK_ACTIONS = os.environ.get("USE_MOCK_ACTIONS", "true").lower() == "true"
+if USE_MOCK_ACTIONS:
+    from gmail.actions import mock_actions as actions_module
+else:
+    actions_module = None
 
 logger = logging.getLogger(__name__)
 
 ACTIONS_MAP = {
-    "mark_as_read": mark_as_read,
-    "mark_as_unread": mark_as_unread,
-    "move_message": move_message
+    "mark_as_read": getattr(actions_module, "mark_as_read", mark_as_read),
+    "mark_as_unread": getattr(actions_module, "mark_as_unread", mark_as_unread),
+    "move_message": getattr(actions_module, "move_message", move_message),
 }
 
 def execute_actions(email, actions):
