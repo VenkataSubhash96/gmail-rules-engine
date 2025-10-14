@@ -10,3 +10,5 @@ venv/
 # Gmail OAuth credentials
 gmail/credentials.json
 token.json
+
+emails.db
